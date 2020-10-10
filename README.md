@@ -11,6 +11,12 @@ npm install
 ```
 
 ## Ejecución
+En una terminal (para el servidor):
 ```
-node server.js
+node server.js 
+```
+En otra terminal (para react):
+
+```
+npm start
 ```
