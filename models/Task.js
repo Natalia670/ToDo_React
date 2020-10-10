@@ -23,10 +23,10 @@ exports.find = (id) => {
     .first();
 }
 
-exports.change_status = (id) => {
+exports.change_status = (task) => {
   return knex('tasks')
-    .update({ status: exports.DONE })
-    .where('id', id);
+    .update({ status: 'done' })
+    .where('id', task.id);
 }
 
 exports.delete = (task) => {

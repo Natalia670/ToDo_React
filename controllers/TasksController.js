@@ -3,6 +3,7 @@ const Task = require('../models/Task');
 exports.store = (req, res) => {
   let task = {};
   task.description = req.body.description;
+  console.log("ADENTRO DEL STORE:", task.description);
   Task.create(task).then((id) => {
     console.log('Task created with id: ', id);
     if (req.xhr || req.headers.accept.indexOf('json') > -1) {
@@ -14,15 +15,12 @@ exports.store = (req, res) => {
 }
 
 exports.done = (req, res) => {
-  let task = {};
-  task.id = req.body.id;
-  task.description = req.body.description;
-  task.status = "done";
-  console.log('Task created with id: ', task.id);
-  Task.change_status(task.id).then((id) => {
-    console.log('Task created with id: ', task.id);
+  let id = req.params.id;
+  console.log("DENTRO DEL TASK CONTR DONE: ", id);
+  Task.find(id)
+  .then((data) => {
     if (req.xhr || req.headers.accept.indexOf('json') > -1) {
-      Task.find(task.id).then((task) => res.json(task));
+      return res.json(), Task.change_status(data);
     } else {
       res.redirect('/');
     }
@@ -30,17 +28,18 @@ exports.done = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-  let task = {};
-  task.id = req.body.id;
-  task.description = req.body.description;
-  Task.delete(task).then((id) => {
-    console.log('Task deleted with id: ', task.id);
+  let id = req.params.id;
+  console.log("DENTRO DEL TASK CONTR DELETE: ", id);
+  Task.find(id)
+  .then((data) => {
     if (req.xhr || req.headers.accept.indexOf('json') > -1) {
-      res.json(task);
+      return res.json(), Task.delete(data);
     } else {
       res.redirect('/');
     }
+    
   });
+
 }
 
 exports.showAll = (req, res) => {

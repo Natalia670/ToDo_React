@@ -7,7 +7,7 @@ module.exports = {
     client: 'mysql2',
     connection: {
       host: process.env.DB_DEVELOPMENT_HOST || 'localhost',
-      port: process.env.DB_DEVELOPMENT_PORT || '5000',
+      port: process.env.DB_DEVELOPMENT_PORT || '3306',
       database: process.env.DB_DEVELOPMENT_NAME || 'my_database',
       user:  process.env.DB_DEVELOPMENT_USER || 'root',
       password: process.env.DB_DEVELOPMENT_PASSWORD || ''
